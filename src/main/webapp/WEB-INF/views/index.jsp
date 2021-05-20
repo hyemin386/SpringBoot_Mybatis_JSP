@@ -49,6 +49,8 @@
 	</footer>
 	
 	<div class="container">
+		<!-- code(key)가 없는 경우 text의 메시지가 출력 -->
+		<h1><spring:message code="hello1234" text="defalut message"></spring:message></h1>
 		<h1><spring:message code="hello"></spring:message></h1>
 		<h1><spring:message code="user.welcome" arguments="${user}, ${msg}" argumentSeparator=","></spring:message></h1>
 	</div>

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %> <!-- jsp 페이지 선언부에 spring message를 사용할 수 있도록 선언 -->
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> <!-- spring form 태그 사용할 수 있도록 선언 -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +14,11 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
 <title>Hello, world!</title>
+<style type="text/css">
+	.c1 {
+	color: red;
+	}
+</style>
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -35,11 +41,44 @@
 		</div>
 	</nav>
 
-	<div class="jumbotron jumbotron-fluid mt-3">
-		<div class="container">
-			<h1 class="display-4">Fluid jumbotron</h1>
-			<p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
-		</div>
+	<div class="container">
+		<h1>JoinPage</h1>
+		<form:form id="frm" modelAttribute="memberVO" action="./join" method="post">
+			<div class="form-group">
+				<label for="userName">USER NAME</label> 
+				<form:input class="form-control" id="userName" path="userName"></form:input>
+				<form:errors path="name"></form:errors>
+			</div>
+<!-- 			<div class="form-group">
+				<label for="password">PASSWORD</label> 
+				<input type="password" class="form-control" id="password">
+			</div> -->
+			<div class="form-group">
+				<label for="password">PASSWORD</label> 
+				<form:password  class="form-control" id="password" path="password"></form:password>
+				<form:errors path="password" class="c1"></form:errors>
+			</div>
+			<div class="form-group">
+				<label for="name">NAME</label> 
+				<form:input type="text" class="form-control" id="name" path="name"></form:input>
+				<form:errors path="name"></form:errors>
+			</div>
+			<div class="form-group">
+				<label for="email">EMAIL</label> 
+				<form:input type="text" class="form-control" id="email" path="email"></form:input>
+				<form:errors path="email"></form:errors>
+			</div>
+			<div class="form-group">
+				<label for="phone">PHONE</label> 
+				<form:input type="text" class="form-control" id="phone" path="phone"></form:input>
+			</div>
+		 	<div class="form-group">
+				<label for="age">AGE</label> 
+				<form:input type="text" class="form-control" id="age" path="age"></form:input>
+				<form:errors path="age"></form:errors>
+			</div> 
+			<input type="submit" id="btn" value="JOIN" class="btn btn-primary">
+		</form:form>
 	</div>
 
 	<footer class="footer mt-auto py-3 bg-dark">
@@ -48,13 +87,6 @@
 		</div>
 	</footer>
 	
-	<div class="container">
-		<!-- code(key)가 없는 경우 text의 메시지가 출력 -->
-		<h1><spring:message code="hello1234" text="defalut message"></spring:message></h1>
-		<h1><spring:message code="hello"></spring:message></h1>
-		<h1><spring:message code="user.welcome" arguments="${user}, ${msg}" argumentSeparator=","></spring:message></h1>
-	</div>
-
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 

@@ -47,7 +47,6 @@
 			<div class="form-group">
 				<label for="userName">USER NAME</label> 
 				<form:input class="form-control" id="userName" path="userName"></form:input>
-				<form:errors path="name"></form:errors>
 			</div>
 <!-- 			<div class="form-group">
 				<label for="password">PASSWORD</label> 

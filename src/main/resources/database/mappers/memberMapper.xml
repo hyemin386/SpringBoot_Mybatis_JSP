@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.hm.j1.member.MemberMapper">
+
+	<insert id="memberJoin" parameterType="MemberVO">
+		insert into member (username, password, name, email, phone, enabled) 
+		values (#{username}, #{password}, #{name}, #{email}, #{phone}, #{enabled})
+	</insert>
+	
+	<insert id="setMemberRole" parameterType="java.util.Map">
+		insert into member_role (username, id) values (#{username}, (select id from role where roleName=#{roleName}))
+	</insert>
+		
+	<insert id="memberJoinFile" parameterType="MemberFileVO">
+		insert into memberFiles (username, fileName, oriName) values(#{username}, #{fileName}, #{oriName})
+	</insert>
+	
+	<select id="memberLogin" resultType="MemberVO" parameterType="MemberVO" resultMap="getLoginResult">
+		SELECT M.*, R.* FROM member M LEFT JOIN member_role MR 
+		ON M.username = MR.username left join role R 
+		ON MR.id = R.id
+		WHERE M.username=#{username}
+	</select>
+	
+	<resultMap type="MemberVO" id="getLoginResult">
+		<id column="username" property="username"></id>
+		<result column="password" property="password"/>
+		<result column="name" property="name"/>
+		<result column="email" property="email"/>
+		<result column="phone" property="phone"/>
+		<result column="enabled" property="enabled"/>
+		<collection property="roles" javaType="java.util.List" ofType="RoleVO">
+			<id column="id" property="id"/>
+			<result column="roleName" property="roleName"/>
+		</collection>
+	</resultMap>
+	
+	<select id="getUsertName" parameterType="MemberVO" resultType="MemberVO">
+		select * from member where username=#{username}
+	</select>
+	
+</mapper>
